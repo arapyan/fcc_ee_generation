@@ -1,0 +1,6 @@
+process zh = e1, E1 => Z, h
+beams = e1, E1 => isr # include the isr
+sqrts = 240 GeV
+n_events = 100000
+sample_format = lhef
+simulate (zh)
