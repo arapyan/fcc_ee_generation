@@ -1,0 +1,33 @@
+! 1) Settings used in the main program.
+
+Main:numberOfEvents = 1000000         ! number of events to generate
+!Main:timesAllowErrors = 3         ! how many aborts before run stops
+
+! 2) Settings related to output in init(), next() and stat().
+
+!25:onMode = off
+!25:onIfMatch = 23 23
+!23:onMode = off
+!23:onIfAny = 12 14 16
+Tune:ee 3
+!TimeShower:pTmaxMatch = 1
+!TimeShower:pTmaxFudge = 1
+!TimeShower:MEcorrections = off
+!TimeShower:globalRecoil = on
+!TimeShower:limitPTmaxGlobal = on
+!TimeShower:nMaxGlobalRecoil = 1
+!TimeShower:globalRecoilMode = 2
+!TimeShower:nMaxGlobalBranch = 1
+
+Init:showChangedSettings = on      ! list changed settings
+Init:showChangedParticleData = off ! list changed particle data
+Next:numberCount = 100             ! print message every n events
+Next:numberShowInfo = 1            ! print event information n times
+Next:numberShowProcess = 1         ! print process record n times
+Next:numberShowEvent = 0           ! print event record n times
+
+! 3) Set the input LHE file
+
+Beams:frameType = 4
+Beams:eCM = 91.2
+Beams:LHEF = /tmp/arapyan/unweighted_events.lhe
