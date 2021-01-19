@@ -1,14 +1,14 @@
 ! 1) Settings used in the main program.
 
-Main:numberOfEvents = 1000000
+Main:numberOfEvents = 3000000         ! number of events to generate
 !Main:timesAllowErrors = 3         ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
 
 !25:onMode = off
 !25:onIfMatch = 23 23
-!23:onMode = off
-!23:onIfAny = 12 14 16
+23:onMode = off
+23:onIfAny = 11 13 15
 Tune:ee 3
 !TimeShower:pTmaxMatch = 1
 !TimeShower:pTmaxFudge = 1
@@ -29,5 +29,5 @@ Next:numberShowEvent = 0           ! print event record n times
 ! 3) Set the input LHE file
 
 Beams:frameType = 4
-Beams:eCM = 91.2
-Beams:LHEF = /tmp/arapyan/unweighted_events.lhe
+Beams:eCM = 250.
+Beams:LHEF = /tmp/arapyan/AAA.lhe

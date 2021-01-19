@@ -20,9 +20,10 @@ set ExecutionPath {
   ECal
   HCal
 
-  TowerMerger
+  Calorimeter
   EFlowMerger
-
+  EFlowFilter
+  
   PhotonEfficiency
   PhotonIsolation
 
@@ -30,12 +31,17 @@ set ExecutionPath {
   ElectronEfficiency
   ElectronIsolation
 
+  ChargedHadronFilter
+
   MuonEfficiency
   MuonIsolation
 
   NeutrinoFilter
-  GenJetFinder
-  FastJetFinder
+  GenJetFinder1
+  FastJetFinder1
+
+  GenJetFinder2
+  FastJetFinder2
 
   MissingET
   GenMissingET
@@ -198,7 +204,7 @@ module SimpleCalorimeter ECal {
 
   set IsEcal true 
  
-  set EnergyMin 0.1
+  set EnergyMin 0.5
   set EnergySignificanceMin 1.0
 
   set SmearTowerCenter true
@@ -215,9 +221,9 @@ module SimpleCalorimeter ECal {
     add PhiBins [expr {$i * $pi/360.0}]
   }
 
-  # 0.01 unit in eta up to eta = 2.5
-  for {set i -500} {$i <= 500} {incr i} {
-    set eta [expr {$i * 0.005}]
+  # 0.01 unit in eta up to eta = 3.0
+  for {set i -300} {$i <= 300} {incr i} {
+    set eta [expr {$i * 0.01}]
     add EtaPhiBins $eta $PhiBins
   }
 
@@ -262,7 +268,7 @@ module SimpleCalorimeter HCal {
 
   set IsEcal false 
  
-  set EnergyMin 0.1
+  set EnergyMin 1.0
   set EnergySignificanceMin 1.0
 
   set SmearTowerCenter true
@@ -325,16 +331,33 @@ module PdgCodeFilter ElectronFilter {
   add PdgCode {-11}
 }
 
+######################
+# ChargedHadronFilter
+######################
+
+module PdgCodeFilter ChargedHadronFilter {
+  set InputArray HCal/eflowTracks
+  set OutputArray chargedHadrons
+  
+  add PdgCode {11}
+  add PdgCode {-11}
+  add PdgCode {13}
+  add PdgCode {-13}
+}
+
+
+
 ###################################################
 # Tower Merger (in case not using e-flow algorithm)
 ###################################################
 
-module Merger TowerMerger {
+module Merger Calorimeter {
 # add InputArray InputArray
   add InputArray ECal/ecalTowers
   add InputArray HCal/hcalTowers
   set OutputArray towers
 }
+
 
 ####################
 # Energy flow merger
@@ -346,6 +369,20 @@ module Merger EFlowMerger {
   add InputArray ECal/eflowPhotons
   add InputArray HCal/eflowNeutralHadrons
   set OutputArray eflow
+}
+
+######################
+# EFlowFilter
+######################
+
+module PdgCodeFilter EFlowFilter {
+  set InputArray EFlowMerger/eflow
+  set OutputArray eflow
+  
+  add PdgCode {11}
+  add PdgCode {-11}
+  add PdgCode {13}
+  add PdgCode {-13}
 }
 
 
@@ -395,16 +432,34 @@ module PdgCodeFilter NeutrinoFilter {
 # MC truth jet finder
 #####################
 
-module FastJetFinder GenJetFinder {
+module FastJetFinder GenJetFinder2 {
   set InputArray NeutrinoFilter/filteredParticles
 
   set OutputArray jets
 
   # algorithm: 1 CDFJetClu, 2 MidPoint, 3 SIScone, 4 kt, 5 Cambridge/Aachen, 6 antikt
   set JetAlgorithm 6
-  set ParameterR 0.4
+  set ParameterR 0.5
 
   set JetPTMin 5.0
+}
+
+#####################
+# MC truth jet finder Exclusive jets
+#####################
+
+module FastJetFinder GenJetFinder1 {
+  set InputArray NeutrinoFilter/filteredParticles
+
+  set OutputArray jets
+
+  # algorithm: 1 CDFJetClu, 2 MidPoint, 3 SIScone, 4 kt, 5 Cambridge/Aachen, 6 antikt, 7 WTA, 8 Njettiness, 9 ee_kt, 10 XCone
+  set JetAlgorithm 4
+  set ParameterR 0.5
+
+  set JetPTMin 5.0
+  set ExclusiveClustering true
+  set NJets 2
 }
 
 #########################
@@ -423,17 +478,37 @@ module Merger GenMissingET {
 # Jet finder
 ############
 
-module FastJetFinder FastJetFinder {
-#  set InputArray TowerMerger/towers
+module FastJetFinder FastJetFinder2 {
+#  set InputArray Calorimeter/towers
   set InputArray EFlowMerger/eflow
 
   set OutputArray jets
 
   # algorithm: 1 CDFJetClu, 2 MidPoint, 3 SIScone, 4 kt, 5 Cambridge/Aachen, 6 antikt
   set JetAlgorithm 6
-  set ParameterR 0.4
+  set ParameterR 0.5
 
   set JetPTMin 5.0
+}
+
+############
+# Jet finder Exclusive
+############
+
+module FastJetFinder FastJetFinder1 {
+#  set InputArray TowerMerger/towers
+  set InputArray EFlowMerger/eflow
+
+  set OutputArray jets
+
+  # algorithm: 1 CDFJetClu, 2 MidPoint, 3 SIScone, 4 kt, 5 Cambridge/Aachen, 6 antikt, 7 WTA, 8 Njettiness, 9 ee_kt, 10	XCone
+  set JetAlgorithm 4
+  set ParameterR 0.5
+
+  set JetPTMin 5.0
+  set ExclusiveClustering true
+  set NJets 2
+
 }
 
 ##################
@@ -441,7 +516,8 @@ module FastJetFinder FastJetFinder {
 ##################
 
 module EnergyScale JetEnergyScale {
-  set InputArray FastJetFinder/jets
+  set InputArray FastJetFinder1/jets
+  set InputArray FastJetFinder2/jets
   set OutputArray jets
 
  # scale formula for jets
@@ -489,7 +565,7 @@ module Efficiency PhotonEfficiency {
 
 module Isolation PhotonIsolation {
   set CandidateInputArray PhotonEfficiency/photons
-  set IsolationInputArray EFlowMerger/eflow
+  set IsolationInputArray EFlowFilter/eflow
 
   set OutputArray photons
 
@@ -523,7 +599,7 @@ module Efficiency ElectronEfficiency {
 
 module Isolation ElectronIsolation {
   set CandidateInputArray ElectronEfficiency/electrons
-  set IsolationInputArray EFlowMerger/eflow
+  set IsolationInputArray EFlowFilter/eflow
 
   set OutputArray electrons
 
@@ -559,7 +635,7 @@ module Efficiency MuonEfficiency {
 
 module Isolation MuonIsolation {
   set CandidateInputArray MuonEfficiency/muons
-  set IsolationInputArray EFlowMerger/eflow
+  set IsolationInputArray EFlowFilter/eflow
 
   set OutputArray muons
 
@@ -642,20 +718,27 @@ module TreeWriter TreeWriter {
 # add Branch InputArray BranchName BranchClass
   add Branch Delphes/allParticles Particle GenParticle
   
-  add Branch GenJetFinder/jets GenJet Jet
+  add Branch GenJetFinder1/jets GenJetExc Jet
+  add Branch GenJetFinder2/jets GenJetInc Jet
   add Branch GenMissingET/momentum GenMissingET MissingET
 
   add Branch TrackMerger/tracks Track Track
-  add Branch TowerMerger/towers Tower Tower
+  add Branch Calorimeter/towers Tower Tower
 
   add Branch HCal/eflowTracks EFlowTrack Track
   add Branch ECal/eflowPhotons EFlowPhoton Tower
   add Branch HCal/eflowNeutralHadrons EFlowNeutralHadron Tower
+
+
+  #Exc jet
+  add Branch FastJetFinder1/jets Jet Jet 
+  #inc jet
+  add Branch FastJetFinder2/jets JetInc Jet
   
   add Branch UniqueObjectFinder/photons Photon Photon
   add Branch UniqueObjectFinder/electrons Electron Electron
   add Branch UniqueObjectFinder/muons Muon Muon
-  add Branch UniqueObjectFinder/jets Jet Jet
+  add Branch UniqueObjectFinder/jets Jet0Iinc Jet
   
   add Branch MissingET/momentum MissingET MissingET
   add Branch ScalarHT/energy ScalarHT ScalarHT
