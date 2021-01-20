@@ -35,7 +35,7 @@ print('Center of mass energy',args.ecm)
 print('Number of events',args.events)
 print('Pythia config',args.pythia8)
 
-print('/afs/cern.ch/work/a/arapyan/MCProd/Delphes-3.4.2/DelphesPythia8 delphes_card_ILD.tcl {0} {1}'.format(args.pythia8, args.output))
+print('DelphesPythia8 delphes_card_ILD.tcl {0} {1}'.format(args.pythia8, args.output))
 
 #run delphes
 os.system('/afs/cern.ch/work/a/arapyan/MCProd/Delphes-3.4.2/DelphesPythia8 delphes_card_ILD.tcl {0} {1}'.format(args.pythia8, args.output))
