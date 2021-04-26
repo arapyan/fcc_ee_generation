@@ -1,7 +1,7 @@
 ! 1) Settings used in the main program.
 
 Main:numberOfEvents = 300000
-Main:timesAllowErrors = 50         ! how many aborts before run stops
+!Main:timesAllowErrors = 50         ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
 
@@ -19,7 +19,6 @@ Tune:ee 3
 !TimeShower:globalRecoilMode = 2
 !TimeShower:nMaxGlobalBranch = 1
 
-PDF:lepton = off
 Init:showChangedSettings = on      ! list changed settings
 Init:showChangedParticleData = off ! list changed particle data
 Next:numberCount = 100             ! print message every n events
@@ -31,4 +30,4 @@ Next:numberShowEvent = 0           ! print event record n times
 
 Beams:frameType = 4
 Beams:eCM = 91.1876
-Beams:LHEF = /tmp/arapyan/eezs_10.lhe
+Beams:LHEF = /tmp/arapyan/eezs_15.lhe
