@@ -1,0 +1,16 @@
+alias q = u:d
+alias Q = U:D
+alias nu = n1:n2:n3
+alias Nu = N1:N2:N3
+alias lep1 = e1:e2:e3
+alias lep2 = E1:E2:E3
+process ee4lepton = e1, E1 => (e2, E2, e2, E2) + (e1, E1, e2, E2) + (e2, E2, e3, E3)
+mb = 2.7645 GeV
+mc = 0.61614 GeV #prevents running quark mass issues
+#cuts = any M > 20 GeV [lep1, lep2]
+cuts = any M > 20 GeV [e2, E2]
+beams = e1, E1 => isr  # include the isr 
+sqrts = 91.1876 GeV
+n_events = 1000000
+sample_format = lhef
+simulate (ee4lepton)

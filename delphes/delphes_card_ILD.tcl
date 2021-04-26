@@ -553,9 +553,9 @@ module Efficiency PhotonEfficiency {
   # set EfficiencyFormula {efficiency formula as a function of eta and pt}
 
   # efficiency formula for photons
-  set EfficiencyFormula {                                      (pt <= 10.0) * (0.00) +
-                                           (abs(eta) <= 1.5) * (pt > 10.0)  * (0.95) +
-                         (abs(eta) > 1.5 && abs(eta) <= 2.5) * (pt > 10.0)  * (0.95) +
+  set EfficiencyFormula {                                      (pt <= 1.0) * (0.00) +
+                                           (abs(eta) <= 1.5) * (pt > 1.0)  * (0.95) +
+                         (abs(eta) > 1.5 && abs(eta) <= 2.5) * (pt > 1.0)  * (0.95) +
                          (abs(eta) > 2.5)                                   * (0.00)}
 }
 

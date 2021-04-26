@@ -1,6 +1,6 @@
 ! 1) Settings used in the main program.
 
-Main:numberOfEvents = 3000000         ! number of events to generate
+Main:numberOfEvents = 100000
 !Main:timesAllowErrors = 3         ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
@@ -29,5 +29,5 @@ Next:numberShowEvent = 0           ! print event record n times
 ! 3) Set the input LHE file
 
 Beams:frameType = 4
-Beams:eCM = 250.
-Beams:LHEF = /tmp/arapyan/AAA.lhe
+Beams:eCM = 240.0
+Beams:LHEF = /tmp/arapyan/isr.lhe

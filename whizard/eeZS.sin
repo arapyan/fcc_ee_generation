@@ -1,0 +1,11 @@
+process eezs_10 = e1, E1 => (e1, E1, H) + (e2, E2, H) + (e3, E3, H)
+mH = 10 GeV
+wH = 0.001 GeV
+mb = 2.7645 GeV
+mc = 0.61614 GeV #prevents running quark mass issues
+cuts =  all M > 20 GeV [e2,E2] and all M > 20 GeV [e3,E3] and all M > 20 GeV [e1,E1] 
+beams = e1, E1 => isr  # include the isr 
+sqrts = 91.1876 GeV
+n_events = 300000
+sample_format = lhef
+simulate (eezs_10)
