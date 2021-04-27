@@ -6,10 +6,10 @@ Cross section given in units of [pb]
 |<xsecinfo neve="1000000" totxsec="3.0130493813E+03" />
 
 2muon/2lepton  -> 2muons with M >20 GeV
-|<xsecinfo neve="10000" totxsec="1.4502498602E+01" />
+<xsecinfo neve="100000" totxsec="1.1339220885E+01" />
 
 2muon/2quark -> 2muons with M>20GeV
-|<xsecinfo neve="10000" totxsec=“4.6975538631E+01" />
+|<xsecinfo neve="10000" totxsec="4.6975538631E+01" />
 
 ZS 500 MeV (muons, electrons, taus, Higgs decays inclusively)
 |<xsecinfo neve="300000" totxsec="3.7375609014E+01" />
