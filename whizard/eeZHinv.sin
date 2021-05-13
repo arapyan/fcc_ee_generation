@@ -1,0 +1,14 @@
+alias lep1 = e1:e2:e3
+alias lep2 = E1:E2:E3
+process eezh = e1, E1 => (e1, E1, h) + (e2, E2, h) + (e3, E3, h) 
+wH=4.07e-03
+beams = e1, E1 => gaussian => isr
+mb = 2.7645 GeV
+mc = 0.61614 GeV #prevents running quark mass issues
+cuts = all M > 50 GeV [lep1, lep2] 
+gaussian_spread1 = 0.165%
+gaussian_spread2 = 0.165%
+sqrts = 240 GeV
+n_events = 200000
+sample_format = lhef
+simulate (eezh)

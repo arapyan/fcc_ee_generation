@@ -1,0 +1,11 @@
+process eeww = e1, E1 => (w+, w-) 
+wH=4.07e-03
+beams = e1, E1 => gaussian => isr
+mb = 2.7645 GeV
+mc = 0.61614 GeV #prevents running quark mass issues 
+gaussian_spread1 = 0.165%
+gaussian_spread2 = 0.165%
+sqrts = 240 GeV
+n_events = 1000000
+sample_format = lhef
+simulate (eeww)

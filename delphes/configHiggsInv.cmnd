@@ -1,14 +1,16 @@
 ! 1) Settings used in the main program.
 
-Main:numberOfEvents = 100000
-!Main:timesAllowErrors = 3         ! how many aborts before run stops
+Main:numberOfEvents = 1000000
+Main:timesAllowErrors = 30000000        ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
 
-!25:onMode = off
-!25:onIfMatch = 23 23
+25:onMode = off
+25:onIfMatch = 23 23
 23:onMode = off
-23:onIfAny = 11 13 15
+23:onIfAny = 12 14 16
+24:onMode = off
+24:onIfAny = 11 13 15
 Tune:ee 3
 !TimeShower:pTmaxMatch = 1
 !TimeShower:pTmaxFudge = 1
@@ -18,6 +20,10 @@ Tune:ee 3
 !TimeShower:nMaxGlobalRecoil = 1
 !TimeShower:globalRecoilMode = 2
 !TimeShower:nMaxGlobalBranch = 1
+!SpaceShower:pTmaxMatch = 1
+!SpaceShower:pTmaxFudge = 1
+!SpaceShower:MEcorrections = off
+!LesHouches:matchInOut = off
 
 Init:showChangedSettings = on      ! list changed settings
 Init:showChangedParticleData = off ! list changed particle data
@@ -30,4 +36,4 @@ Next:numberShowEvent = 0           ! print event record n times
 
 Beams:frameType = 4
 Beams:eCM = 240.0
-Beams:LHEF = /tmp/arapyan/isr.lhe
+Beams:LHEF = /tmp/arapyan/eezz.lhe

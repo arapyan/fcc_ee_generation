@@ -28,3 +28,11 @@ ZS 15 GeV
 
 ZS 25 GeV
 |<xsecinfo neve="300000" totxsec="2.2909155505E+00" />
+
+
+H->inv samples (sqrt{s}=240 GeV, beam spread of 0.165%, beam ISR)
+
+zh_inv.root     20.45 fb
+zz_inv.root     116.27 fb
+ww_inv.root     176.62 fb
+

@@ -1,6 +1,6 @@
 ! 1) Settings used in the main program.
 
-Main:numberOfEvents = 300000
+Main:numberOfEvents = 100000
 !Main:timesAllowErrors = 50         ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
@@ -9,7 +9,9 @@ Main:numberOfEvents = 300000
 !25:onIfMatch = 23 23
 !23:onMode = off
 !23:onIfAny = 12 14 16
+
 Tune:ee 3
+!PDF:lepton = off
 !TimeShower:pTmaxMatch = 1
 !TimeShower:pTmaxFudge = 1
 !TimeShower:MEcorrections = off
@@ -30,4 +32,4 @@ Next:numberShowEvent = 0           ! print event record n times
 
 Beams:frameType = 4
 Beams:eCM = 91.1876
-Beams:LHEF = /tmp/arapyan/eezs_15.lhe
+Beams:LHEF = /tmp/arapyan/ee4lepton.lhe
