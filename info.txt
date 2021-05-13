@@ -21,7 +21,7 @@ ZS 5 GeV
 |<xsecinfo neve="300000" totxsec="1.7027183226E+01" />
 
 ZS 10 GeV
-|<xsecinfo neve="300000" totxsec="9.4413192993E+00" />
+|<xsecinfo neve="300000" totxsec="7.85615326" />
 
 ZS 15 GeV
 |<xsecinfo neve="300000" totxsec="5.7483406492E+00" />
