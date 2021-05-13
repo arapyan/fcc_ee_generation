@@ -4,13 +4,16 @@ alias nu = n1:n2:n3
 alias Nu = N1:N2:N3
 alias lep1 = e1:e2:e3
 alias lep2 = E1:E2:E3
-process ee4lepton = e1, E1 => (e2, E2, e2, E2) + (e1, E1, e2, E2) + (e2, E2, e3, E3)
+process ee4lepton = e1, E1 => (e2, E2, q, Q) + (e2, E2, c, C) + (e2, E2, b, B) +  (e2, E2, s, S) 
 mb = 2.7645 GeV
 mc = 0.61614 GeV #prevents running quark mass issues
+ms = 0.486 GeV
+#mu = 0.346
+#md = 0.340
 #cuts = any M > 20 GeV [lep1, lep2]
-cuts = any M > 20 GeV [e2, E2]
+cuts = any M > 20 GeV [e2,E2] and all M > 0.3 GeV [q:s:c:b,Q:S:C:B]
 beams = e1, E1 => isr  # include the isr 
 sqrts = 91.1876 GeV
-n_events = 1000000
+n_events = 100000
 sample_format = lhef
 simulate (ee4lepton)
