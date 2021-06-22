@@ -1,0 +1,12 @@
+##############################################
+mu+mu- -> sqrt{s] = 6 TeV, ME with Whizard 3.0 (beam ISR included) and showered with Pythia 8.243
+
+
+Cross section given in units of [fb]
+
+SM samples:
+wpwm_vbs_6tev.root               257.7
+wpwmz_ztonunu_6tev.root          3.599
+wzmunu_6tev.root                 283.2
+zzmumu_6tev.root                 0.8298
+ggwpwm_6tev.root                 2795.3 
